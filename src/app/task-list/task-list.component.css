@@ -1,0 +1,15 @@
+.contaienr {
+  width: 700px;
+}
+.todo-list {
+  width: 500px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.is-done {
+  text-decoration: line-through;
+}
