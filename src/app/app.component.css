@@ -1,7 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 header {
   background-image: linear-gradient(120deg, #222222, #171717);
-  margin: -10px;
-  margin-bottom: 50px;
   color: white;
   text-align: center;
   vertical-align: middle;

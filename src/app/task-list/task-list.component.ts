@@ -1,10 +1,12 @@
 import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, RouterModule],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })
