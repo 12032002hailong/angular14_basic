@@ -2,7 +2,7 @@
   <a href="go_to-link" routerLink="/tasks">Go to Tasks</a>
 
   <mat-card class="demo-inline-calendar-card">
-    <mat-calendar [(selected)]="selected"></mat-calendar>
+    <mat-calendar [(selected)]="selectedDate"></mat-calendar>
   </mat-card>
-  <p>{{ selected }}</p>
+  <p>{{ selectedDate.toLocaleDateString() }}</p>
 </div>

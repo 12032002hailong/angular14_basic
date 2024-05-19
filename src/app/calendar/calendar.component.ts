@@ -15,13 +15,9 @@ import { RouterModule } from '@angular/router';
 })
 export class CalendarComponent implements OnInit {
 
-  selected: any;
+  selectedDate = new Date();
 
   ngOnInit(): void {
 
   }
-
-
-
-
 }
