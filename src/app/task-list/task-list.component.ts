@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { ActivatedRoute, Route } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -42,12 +42,12 @@ export class TaskListComponent implements OnInit {
   ]
 
 
-  add() {
+  add(taskNgForm: NgForm) {
+    if (taskNgForm.touched === false) return;
     if (this.newTaskTitle) {
-
       this.tasks.push(new Task(this.newTaskTitle));
     }
-    this.newTaskTitle = "";
+    taskNgForm.reset({ date: this.date });
   }
 
   remove(existingTask: Task) {

@@ -1,7 +1,7 @@
 <div class="container">
   <a href="go_to-link" routerLink="">Go to Calendar</a>
 
-  <form (ngSubmit)="add()">
+  <form (ngSubmit)="add(taskNgForm)" #taskNgForm="ngForm">
     <div class="input-group-calendar">
       <div class="calendar-input">
         <input
