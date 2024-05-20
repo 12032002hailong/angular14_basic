@@ -5,6 +5,7 @@
     <div class="input-group-calendar">
       <div class="calendar-input">
         <input
+          readonly
           name="date"
           type="text"
           [(ngModel)]="date"
@@ -22,6 +23,7 @@
           type="text"
           placeholder="Todo"
           #newTask="ngModel"
+          minlength="4"
           [(ngModel)]="newTaskTitle"
           name="taskTitle"
         />
@@ -33,7 +35,10 @@
     *ngIf="newTask.invalid && (newTask.touched || newTask.dirty)"
     class="validation-error"
   >
-    Task title required.
+    <div *ngIf="newTask.errors?.['required']">Task title required.</div>
+    <div *ngIf="newTask.errors?.['minlength']">
+      Task title must at least have 4 characters.
+    </div>
   </div>
 
   <table id="customers">
