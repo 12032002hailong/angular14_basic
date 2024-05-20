@@ -4,11 +4,17 @@ import { RouterModule } from '@angular/router';
 import { ActivatedRoute, Route } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [NgFor, RouterModule, MatDatepickerModule, MatNativeDateModule],
+  imports: [
+    NgFor, RouterModule, MatDatepickerModule,
+    MatNativeDateModule, FormsModule,
+    ReactiveFormsModule
+  ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css',
   providers: [
@@ -20,6 +26,7 @@ export class TaskListComponent implements OnInit {
   constructor(private route: ActivatedRoute) {
 
   }
+  newTaskTitle: string = "";
 
   date: Date = new Date();
   ngOnInit(): void {
@@ -35,14 +42,12 @@ export class TaskListComponent implements OnInit {
   ]
 
 
-  add(newTask: string) {
-    // if (newTask) {
-    //   this.tasks = [...this.tasks, newTask]
-    // }
-    if (newTask) {
+  add() {
+    if (this.newTaskTitle) {
 
-      this.tasks.push(new Task(newTask));
+      this.tasks.push(new Task(this.newTaskTitle));
     }
+    this.newTaskTitle = "";
   }
 
   remove(existingTask: Task) {
