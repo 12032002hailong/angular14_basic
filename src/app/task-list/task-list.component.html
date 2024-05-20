@@ -18,8 +18,10 @@
     <div class="todo-list">
       <div class="input-group">
         <input
+          required
           type="text"
           placeholder="Todo"
+          #newTask="ngModel"
           [(ngModel)]="newTaskTitle"
           name="taskTitle"
         />
@@ -27,6 +29,12 @@
       </div>
     </div>
   </form>
+  <div
+    *ngIf="newTask.invalid && (newTask.touched || newTask.dirty)"
+    class="validation-error"
+  >
+    Task title required.
+  </div>
 
   <table id="customers">
     <tr class="even" *ngFor="let task of tasks; let i = index">

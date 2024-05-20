@@ -1,10 +1,10 @@
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ActivatedRoute, Route } from '@angular/router';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
@@ -12,8 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [
     NgFor, RouterModule, MatDatepickerModule,
-    MatNativeDateModule, FormsModule,
-    ReactiveFormsModule
+    MatNativeDateModule, FormsModule, NgIf,
+    ReactiveFormsModule,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css',
@@ -44,6 +44,7 @@ export class TaskListComponent implements OnInit {
 
   add(taskNgForm: NgForm) {
     if (taskNgForm.touched === false) return;
+    if (taskNgForm.valid === false) return;
     if (this.newTaskTitle) {
       this.tasks.push(new Task(this.newTaskTitle));
     }
