@@ -94,3 +94,12 @@ table {
 .validation-error {
   color: red;
 }
+
+button {
+  border-style: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: gray;
+}

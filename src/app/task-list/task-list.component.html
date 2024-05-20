@@ -1,7 +1,7 @@
 <div class="container">
   <a href="go_to-link" routerLink="">Go to Calendar</a>
 
-  <form (ngSubmit)="add(taskNgForm)" #taskNgForm="ngForm">
+  <form (ngSubmit)="add(taskNgForm)" #taskNgForm="ngForm" #form>
     <div class="input-group-calendar">
       <div class="calendar-input">
         <input
@@ -27,7 +27,12 @@
           [(ngModel)]="newTaskTitle"
           name="taskTitle"
         />
-        <button class="add-button">+</button>
+        <button
+          class="button button-parimary"
+          [disabled]="!form.checkValidity()"
+        >
+          +
+        </button>
       </div>
     </div>
   </form>
