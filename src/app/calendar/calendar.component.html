@@ -1,5 +1,7 @@
 <div class="calender-container">
-  <a href="go_to-link" routerLink="/tasks">Go to Tasks</a>
+  <a [routerLink]="['/tasks', { date: selectedDate.toLocaleDateString() }]"
+    >Go to Tasks</a
+  >
 
   <mat-card class="demo-inline-calendar-card">
     <mat-calendar [(selected)]="selectedDate"></mat-calendar>

@@ -1,7 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { ActivatedRoute, Route } from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
@@ -12,11 +12,12 @@ import { RouterModule } from '@angular/router';
 })
 export class TaskListComponent implements OnInit {
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
 
   }
   ngOnInit(): void {
-
+    let date: Date = new Date(this.route.snapshot.params['date']);
+    console.log(date);
   }
 
   tasks: Task[] = [
