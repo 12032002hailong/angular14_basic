@@ -2,22 +2,28 @@ import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ActivatedRoute, Route } from '@angular/router';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [NgFor, RouterModule],
+  imports: [NgFor, RouterModule, MatDatepickerModule, MatNativeDateModule],
   templateUrl: './task-list.component.html',
-  styleUrl: './task-list.component.css'
+  styleUrl: './task-list.component.css',
+  providers: [
+    MatDatepickerModule,
+  ],
 })
 export class TaskListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {
 
   }
+
+  date: Date = new Date();
   ngOnInit(): void {
-    let date: Date = new Date(this.route.snapshot.params['date']);
-    console.log(date);
+    this.date = new Date(this.route.snapshot.params['date']);
   }
 
   tasks: Task[] = [

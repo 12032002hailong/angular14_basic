@@ -1,6 +1,16 @@
-<a href="go_to-link" routerLink="">Go to Calendar</a>
-
 <div class="container">
+  <a href="go_to-link" routerLink="">Go to Calendar</a>
+
+  <div class="input-group">
+    <input
+      type="text"
+      [value]="date"
+      aria-label="lorem ipsum"
+      [matDatepicker]="picker"
+    />
+    <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </div>
   <div class="todo-list">
     <div class="input-group">
       <input type="text" placeholder="Todo" #newTask />
