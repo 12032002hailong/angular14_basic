@@ -49,7 +49,7 @@
   </div>
 
   <table id="customers">
-    <tr class="even" *ngFor="let task of tasks; let i = index">
+    <tr class="even" *ngFor="let task of tasks | async; let i = index">
       <th [class.is-done]="task.isDone">{{ task.title }}</th>
       <div class="button-group">
         <button class="remove-button" (click)="remove(task)">X</button>

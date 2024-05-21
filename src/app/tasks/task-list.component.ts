@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ActivatedRoute, Route } from '@angular/router';
@@ -21,6 +21,7 @@ import { TaskService } from './tasks.service';
     FormsModule,
     NgIf,
     ReactiveFormsModule,
+    CommonModule
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css',
@@ -45,12 +46,18 @@ export class TaskListComponent implements OnInit {
     if (taskNgForm.valid === false) return;
     if (this.newTask.title) {
       this.taskService.addTask(this.newTask);
+      this.tasks = this.taskService.getAllTasks();
     }
     taskNgForm.reset({ date: this.newTask.date });
   }
 
   remove(existingTask: Task) {
-    this.taskService.removeTask(existingTask);
+    let userConfirm = confirm(`Are you sure remove ${existingTask.title}`)
+    if (userConfirm) {
+      this.taskService.removeTask(existingTask);
+      this.tasks = this.taskService.getAllTasks();
+    }
+
   }
 
   toggleDone(task: Task) {
