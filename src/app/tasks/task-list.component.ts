@@ -8,6 +8,7 @@ import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Task } from './Task';
 import { NewTask } from './NewTask';
+import { TaskService } from './tasks.service';
 
 @Component({
   selector: 'app-task-list',
@@ -26,37 +27,30 @@ import { NewTask } from './NewTask';
   providers: [MatDatepickerModule],
 })
 export class TaskListComponent implements OnInit {
-  constructor(private route: ActivatedRoute) { }
-  newTask: NewTask = new NewTask();
+  constructor(
+    private route: ActivatedRoute,
+    private taskService: TaskService
+  ) { }
 
+  tasks = this.taskService.getAllTasks();
+  newTask: NewTask = new NewTask();
   date: Date = new Date();
   ngOnInit(): void {
     let strDate = new Date(this.route.snapshot.params['date']);
     this.newTask = new NewTask(this.newTask.title, new Date(strDate));
   }
 
-  tasks: Task[] = [
-    new Task('visit ann'),
-    new Task('call dad'),
-    new Task('go to the gym'),
-    new Task('wash the dishes'),
-    new Task('shop for the party'),
-  ];
-
   add(taskNgForm: NgForm) {
-    console.log(taskNgForm);
     if (taskNgForm.touched === false) return;
     if (taskNgForm.valid === false) return;
     if (this.newTask.title) {
-      this.tasks.push(new Task(this.newTask.title));
+      this.taskService.addTask(this.newTask);
     }
     taskNgForm.reset({ date: this.newTask.date });
   }
 
   remove(existingTask: Task) {
-    this.tasks = this.tasks.filter((item) => {
-      return item !== existingTask;
-    });
+    this.taskService.removeTask(existingTask);
   }
 
   toggleDone(task: Task) {
