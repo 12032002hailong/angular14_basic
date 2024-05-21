@@ -8,7 +8,7 @@
           readonly
           name="date"
           type="text"
-          [(ngModel)]="date"
+          [(ngModel)]="newTask.date"
           aria-label="lorem ipsum"
           [matDatepicker]="picker"
         />
@@ -22,9 +22,9 @@
           required
           type="text"
           placeholder="Todo"
-          #newTask="ngModel"
+          #newTaskNgModel="ngModel"
           minlength="4"
-          [(ngModel)]="newTaskTitle"
+          [(ngModel)]="newTask.title"
           name="taskTitle"
         />
         <button
@@ -37,11 +37,13 @@
     </div>
   </form>
   <div
-    *ngIf="newTask.invalid && (newTask.touched || newTask.dirty)"
+    *ngIf="
+      newTaskNgModel.invalid && (newTaskNgModel.touched || newTaskNgModel.dirty)
+    "
     class="validation-error"
   >
-    <div *ngIf="newTask.errors?.['required']">Task title required.</div>
-    <div *ngIf="newTask.errors?.['minlength']">
+    <div *ngIf="newTaskNgModel.errors?.['required']">Task title required.</div>
+    <div *ngIf="newTaskNgModel.errors?.['minlength']">
       Task title must at least have 4 characters.
     </div>
   </div>

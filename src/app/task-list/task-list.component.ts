@@ -6,31 +6,33 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule, NgForm, NgModel } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Task } from './Task';
+import { NewTask } from './NewTask';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
   imports: [
-    NgFor, RouterModule, MatDatepickerModule,
-    MatNativeDateModule, FormsModule, NgIf,
+    NgFor,
+    RouterModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FormsModule,
+    NgIf,
     ReactiveFormsModule,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css',
-  providers: [
-    MatDatepickerModule,
-  ],
+  providers: [MatDatepickerModule],
 })
 export class TaskListComponent implements OnInit {
-
-  constructor(private route: ActivatedRoute) {
-
-  }
-  newTaskTitle: string = "";
+  constructor(private route: ActivatedRoute) { }
+  newTask: NewTask = new NewTask();
 
   date: Date = new Date();
   ngOnInit(): void {
-    this.date = new Date(this.route.snapshot.params['date']);
+    let strDate = new Date(this.route.snapshot.params['date']);
+    this.newTask = new NewTask(this.newTask.title, new Date(strDate));
   }
 
   tasks: Task[] = [
@@ -39,33 +41,27 @@ export class TaskListComponent implements OnInit {
     new Task('go to the gym'),
     new Task('wash the dishes'),
     new Task('shop for the party'),
-  ]
-
+  ];
 
   add(taskNgForm: NgForm) {
+    console.log(taskNgForm);
     if (taskNgForm.touched === false) return;
     if (taskNgForm.valid === false) return;
-    if (this.newTaskTitle) {
-      this.tasks.push(new Task(this.newTaskTitle));
+    if (this.newTask.title) {
+      this.tasks.push(new Task(this.newTask.title));
     }
-    taskNgForm.reset({ date: this.date });
+    taskNgForm.reset({ date: this.newTask.date });
   }
 
   remove(existingTask: Task) {
-    this.tasks = this.tasks.filter(item => {
-      return item !== existingTask
-    })
+    this.tasks = this.tasks.filter((item) => {
+      return item !== existingTask;
+    });
   }
 
   toggleDone(task: Task) {
     task.isDone = !task.isDone;
-
   }
 }
 
-class Task {
-  constructor(public title: string) {
 
-  }
-  public isDone = false;
-}
